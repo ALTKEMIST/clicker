@@ -1,0 +1,8 @@
+{
+    "name": "Alchemist Clicker",
+    "short_name": "ALC",
+    "theme_color": "#000000",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "start_url": "/clicker/index.html"
+}

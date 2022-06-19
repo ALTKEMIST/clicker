@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./public/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./public/vendor/fontawesome_5_13_0/css/all.min.css">
+    <link rel="stylesheet" href="./public/css/style.css">
+    <link rel="shortcut icon" href="./public/img/ALTKEMISTLogo.png" type="image/x-icon">
+
+    <title>The Alchemist Clicker</title>
+
+    <!-- loading pwa -->
+    <script src="public/vendor/workbox/workbox-sw.js"></script>
+    <!-- manifest del app -->
+    <link rel="manifest" href="manifest.webmanifest" />
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('public/sw.js');
+            });
+        }
+    </script>
+</head>
+<body onload="loadLista()">
+    <nav class="navbar fixed-top">
+        <span class="h3 text-dark" data-toggle="modal" data-target="#optionsM"><i class="fas fa-cog"></i></span>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-10 offset-1">
+                <div class="row mt-3">
+                    <div class="col text-center">
+                        <h2>The Alchemist Clicker</h2>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <h3>Elements:</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col anyClass">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <span class="font-weight-bold">Azufre</span><br>
+                                        Costo: <span id="azufre_cost"></span> litros<br>
+                                        Total: <span id="azufre"></span><br>
+                                        <small class="text-muted">+<span id="azufreValue"></span> litro cada segundo.</small>
+                                        <button type="button" class="btn btn-sm btn-block btn-outline-info" onclick="upgrade(1)">ADD</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        <span class="font-weight-bold">Mercurio</span><br>
+                                        Costo: <span id="azufre_cost2"></span> litros<br>
+                                        Total: <span id="azufre2"></span><br>
+                                        <small class="text-muted">+<span id="azufreValue"></span> litro cada segundo.</small>
+                                        <button type="button" class="btn btn-sm btn-block btn-outline-info" onclick="upgrade(2)">ADD</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        <span class="font-weight-bold">Sal</span><br>
+                                        Costo: <span id="azufre_cost3"></span> litros<br>
+                                        Total: <span id="azufre3"></span><br>
+                                        <small class="text-muted">+<span id="azufreValue"></span> litro cada segundo.</small>
+                                        <button type="button" class="btn btn-sm btn-block btn-outline-info" onclick="upgrade(3)">ADD</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        <span class="font-weight-bold">Fuego</span><br>
+                                        Costo: <span id="azufre_cost4"></span> litros<br>
+                                        Total: <span id="azufre4"></span><br>
+                                        <small class="text-muted">+<span id="azufreValue"></span> litro cada segundo.</small>
+                                        <button type="button" class="btn btn-sm btn-block btn-outline-info" onclick="upgrade(4)">ADD</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <h3>Spirit:</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col anyClass">
+                                <div class="card">
+                                    <div class="card-body">
+                                        Transmutación<br>
+                                        <small>Costo: <span id="clicks_cost"></span> litros</small><br>
+                                        <small class="text-muted">Tus Clicks generan el doble de litros.</small>
+                                        <button type="button" class="btn btn-block btn-sm btn-success" onclick="upgradeSpirit(0)">GET</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        Conexión con el universo<br>
+                                        <small>Costo: <span id="azufreS_cost"></span> litros</small><br>
+                                        <small class="text-muted">Tu Azufre genera el doble de litros.</small>
+                                        <button type="button" class="btn btn-block btn-sm btn-success" onclick="upgradeSpirit(1)">GET</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col text-center">
+                        <h3>Production:</h3>
+                        Has producido <span id="production"></span> litros de Quintaesencia.
+                        </br>
+                        <span id="per_second"></span> litros por segundo
+                        </br>
+                        <img class="intButton mt-4" onclick="add()" src="./public/img/ALTKEMISTLogo.png" alt="Click to generate Quintaesencia" width="25%"/>
+                        <br><small class="text-muted">Click to generate!</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Options-->
+    <div class="modal fade" id="optionsM" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Options</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="font-weight-bold">Guardar la partida</h5>
+                <span id="gameState"></span>
+                <button type="button" class="btn btn-block btn-sm btn-success" onclick="saveGame()">Save game</button>
+                <button type="button" class="btn btn-block btn-sm btn-danger" onclick="clearGame()">Delete saved game</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-dark">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <script src="./public/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="./public/vendor/popper/popper.min.js"></script>
+    <script src="./public/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./public/js/main.js"></script>
+</body>
+</html>
