@@ -1,3 +1,36 @@
+body{
+  background-color: rgb(23, 32, 42);
+}
+
+.gameaudio{
+  display: none;
+  /*position: absolute; 
+  top: -9999px; 
+  left: -9999px;*/
+}
+
+#nested {
+  position: relative;
+  left: -12pt;
+  color: rgba(217, 83, 79, 0.7);
+}
+
+#gamebox{
+  background-color: rgb(253, 253, 253);
+  border-radius: 5px;
+  padding: 12pt;
+}
+
+.gametitle{
+  -webkit-text-stroke: 2px white;
+}
+
+.gametitle:hover{
+  -webkit-text-stroke: 2px white;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
 .intButton:hover{
     opacity: 0.6;
     width: 26%;
@@ -14,6 +47,20 @@
     overflow-y: scroll;
 }
 
+.version{
+  position: fixed;
+  bottom: 20px; right: 20px;
+  -webkit-text-stroke: 2px white;
+}
+
+.btn-filo{
+  background-color: rgb(221, 25, 113);
+  color: white;
+}
+
+.ps-text{
+  color: rgb(221, 25, 113);
+}
 
 /* width */
 ::-webkit-scrollbar {

@@ -26,17 +26,18 @@
 </head>
 <body onload="loadLista()">
     <nav class="navbar fixed-top">
-        <span class="h3 text-dark" data-toggle="modal" data-target="#optionsM"><i class="fas fa-cog"></i></span>
+        <span class="h3 text-dark gametitle" data-toggle="modal" data-target="#optionsM"><i class="fas fa-cog"></i></span>
+        <span class="h3 text-dark gametitle" onclick="musicStart()"><i class="fas fa-music"><i class="fa fa-ban" id="nested"></i></i></span>
     </nav>
     <div class="container-fluid">
         <div class="row">
             <div class="col-10 offset-1">
                 <div class="row mt-3">
                     <div class="col text-center">
-                        <h2>The Alchemist Clicker</h2>
+                        <h2 class="font-weight-bold gametitle">The Alchemist Clicker</h2>
                     </div>
                 </div>
-                <div class="row mt-5">
+                <div class="row mt-3" id="gamebox">
                     <div class="col">
                         <div class="row">
                             <div class="col">
@@ -47,38 +48,65 @@
                             <div class="col anyClass">
                                 <div class="card">
                                     <div class="card-body">
-                                        <span class="font-weight-bold">Azufre</span><br>
-                                        Costo: <span id="azufre_cost"></span> litros<br>
+                                        <span class="font-weight-bold">Sulfur</span><br>
+                                        Cost: <span id="azufre_cost"></span> litres<br>
                                         Total: <span id="azufre"></span><br>
-                                        <small class="text-muted">+<span id="azufreValue"></span> litro cada segundo.</small>
+                                        <small class="text-muted">+<span id="azufreValue"></span> litre every second.</small>
                                         <button type="button" class="btn btn-sm btn-block btn-outline-info" onclick="upgrade(1)">ADD</button>
                                     </div>
                                 </div>
                                 <div class="card mt-2">
                                     <div class="card-body">
-                                        <span class="font-weight-bold">Mercurio</span><br>
-                                        Costo: <span id="azufre_cost2"></span> litros<br>
-                                        Total: <span id="azufre2"></span><br>
-                                        <small class="text-muted">+<span id="azufreValue"></span> litro cada segundo.</small>
+                                        <span class="font-weight-bold">Mercury</span><br>
+                                        Cost: <span id="mercurio_cost"></span> litres<br>
+                                        Total: <span id="mercurio"></span><br>
+                                        <small class="text-muted">+<span id="mercurioValue"></span> litre every second.</small>
                                         <button type="button" class="btn btn-sm btn-block btn-outline-info" onclick="upgrade(2)">ADD</button>
                                     </div>
                                 </div>
                                 <div class="card mt-2">
                                     <div class="card-body">
-                                        <span class="font-weight-bold">Sal</span><br>
-                                        Costo: <span id="azufre_cost3"></span> litros<br>
-                                        Total: <span id="azufre3"></span><br>
-                                        <small class="text-muted">+<span id="azufreValue"></span> litro cada segundo.</small>
+                                        <span class="font-weight-bold">Salt</span><br>
+                                        Cost: <span id="sal_cost"></span> litres<br>
+                                        Total: <span id="sal"></span><br>
+                                        <small class="text-muted">+<span id="salValue"></span> litre every second.</small>
                                         <button type="button" class="btn btn-sm btn-block btn-outline-info" onclick="upgrade(3)">ADD</button>
                                     </div>
                                 </div>
                                 <div class="card mt-2">
                                     <div class="card-body">
-                                        <span class="font-weight-bold">Fuego</span><br>
-                                        Costo: <span id="azufre_cost4"></span> litros<br>
-                                        Total: <span id="azufre4"></span><br>
-                                        <small class="text-muted">+<span id="azufreValue"></span> litro cada segundo.</small>
+                                        <span class="font-weight-bold">Fire</span><br>
+                                        Cost: <span id="fire_cost"></span> litres<br>
+                                        Total: <span id="fire"></span><br>
+                                        <small class="text-muted">+<span id="fireValue"></span> litre every second.</small>
                                         <button type="button" class="btn btn-sm btn-block btn-outline-info" onclick="upgrade(4)">ADD</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        <span class="font-weight-bold">Water</span><br>
+                                        Cost: <span id="water_cost"></span> litres<br>
+                                        Total: <span id="water"></span><br>
+                                        <small class="text-muted">+<span id="waterValue"></span> litre every second.</small>
+                                        <button type="button" class="btn btn-sm btn-block btn-outline-info" onclick="upgrade(5)">ADD</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        <span class="font-weight-bold">Air</span><br>
+                                        Cost: <span id="air_cost"></span> litres<br>
+                                        Total: <span id="air"></span><br>
+                                        <small class="text-muted">+<span id="airValue"></span> litre every second.</small>
+                                        <button type="button" class="btn btn-sm btn-block btn-outline-info" onclick="upgrade(6)">ADD</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        <span class="font-weight-bold">Earth</span><br>
+                                        Cost: <span id="earth_cost"></span> litres<br>
+                                        Total: <span id="earth"></span><br>
+                                        <small class="text-muted">+<span id="earthValue"></span> litre every second.</small>
+                                        <button type="button" class="btn btn-sm btn-block btn-outline-info" onclick="upgrade(7)">ADD</button>
                                     </div>
                                 </div>
                             </div>
@@ -94,18 +122,73 @@
                             <div class="col anyClass">
                                 <div class="card">
                                     <div class="card-body">
-                                        Transmutación<br>
-                                        <small>Costo: <span id="clicks_cost"></span> litros</small><br>
-                                        <small class="text-muted">Tus Clicks generan el doble de litros.</small>
+                                        Transmutation<br>
+                                        <small>Cost: <span id="clicks_cost"></span> litres</small><br>
+                                        <small class="text-muted">Your Clicks generate double liters.</small>
                                         <button type="button" class="btn btn-block btn-sm btn-success" onclick="upgradeSpirit(0)">GET</button>
                                     </div>
                                 </div>
                                 <div class="card mt-2">
                                     <div class="card-body">
-                                        Conexión con el universo<br>
-                                        <small>Costo: <span id="azufreS_cost"></span> litros</small><br>
-                                        <small class="text-muted">Tu Azufre genera el doble de litros.</small>
+                                        Connection with the universe<br>
+                                        <small>Cost: <span id="azufreS_cost"></span> litres</small><br>
+                                        <small class="text-muted">Your Sulfur generates double liters.</small>
                                         <button type="button" class="btn btn-block btn-sm btn-success" onclick="upgradeSpirit(1)">GET</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        Soul and conscience<br>
+                                        <small>Cost: <span id="mercurioS_cost"></span> litres</small><br>
+                                        <small class="text-muted">Your Mercury generates double liters.</small>
+                                        <button type="button" class="btn btn-block btn-sm btn-success" onclick="upgradeSpirit(2)">GET</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        Domain of matter<br>
+                                        <small>Cost: <span id="salS_cost"></span> litres</small><br>
+                                        <small class="text-muted">Your Salt generates double liters.</small>
+                                        <button type="button" class="btn btn-block btn-sm btn-success" onclick="upgradeSpirit(3)">GET</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        Control over the seven planetary metals<br>
+                                        <small>Cost: <span id="fireS_cost"></span> litres</small><br>
+                                        <small class="text-muted">Your Fire generates double liters.</small>
+                                        <button type="button" class="btn btn-block btn-sm btn-success" onclick="upgradeSpirit(4)">GET</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        Energy from the mundane elements<br>
+                                        <small>Cost: <span id="waterS_cost"></span> litres</small><br>
+                                        <small class="text-muted">Your Water generates double liters.</small>
+                                        <button type="button" class="btn btn-block btn-sm btn-success" onclick="upgradeSpirit(5)">GET</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        Alchemical Component Inventory<br>
+                                        <small>Cost: <span id="airS_cost"></span> litres</small><br>
+                                        <small class="text-muted">Your Air generates double liters.</small>
+                                        <button type="button" class="btn btn-block btn-sm btn-success" onclick="upgradeSpirit(6)">GET</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        Twelve alchemical processes<br>
+                                        <small>Cost: <span id="earthS_cost"></span> litres</small><br>
+                                        <small class="text-muted">Your Earth generates double liters.</small>
+                                        <button type="button" class="btn btn-block btn-sm btn-success" onclick="upgradeSpirit(7)">GET</button>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body font-weight-bold">
+                                        Philosopher's stone<br>
+                                        <small>Cost: <span id="stoneS_cost"></span> litres</small><br>
+                                        <button type="button" class="btn btn-block btn-sm btn-filo" onclick="upgradeSpirit(8)">GET</button>
                                     </div>
                                 </div>
                             </div>
@@ -113,12 +196,15 @@
                     </div>
                     <div class="col text-center">
                         <h3>Production:</h3>
-                        Has producido <span id="production"></span> litros de Quintaesencia.
+                        You have produced <span id="production"></span> litres of Quintessence.
+                        
                         </br>
-                        <span id="per_second"></span> litros por segundo
+                        <span id="per_second"></span> litres per second
                         </br>
                         <img class="intButton mt-4" onclick="add()" src="./public/img/ALTKEMISTLogo.png" alt="Click to generate Quintaesencia" width="25%"/>
                         <br><small class="text-muted">Click to generate!</small>
+                        <br>
+                        <h5 class="mt-5 ps-text">You have <span id="stones" class="font-weight-bold"></span> Philosopher's Stones.</h5>
                     </div>
                 </div>
             </div>
@@ -126,8 +212,11 @@
     </div>
 
     <!-- Options-->
+
+    <div class="text-dark h4 version">Version 1.0.0</div>
+
     <div class="modal fade" id="optionsM" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">Options</h5>
@@ -136,14 +225,39 @@
               </button>
             </div>
             <div class="modal-body">
-                <h5 class="font-weight-bold">Guardar la partida</h5>
+                <div class="row">
+                    <div class=col>
+                        Background image url: 
+                    </div>
+                    <div class=col>
+                        <input type="text" class="form-control form-control-sm" id=backgroundImg value="" />
+                    </div>
+                    <div class=col>
+                        <button type="button" class="btn btn-block btn-sm btn-outline-dark" onclick="loadBG()">Load</button>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class=col>
+                        Background music url: 
+                    </div>
+                    <div class=col>
+                        <input type="text" class="form-control form-control-sm" id=backgroundM value="" placeholder="Please enter a valid url" />
+                    </div>
+                    <div class=col>
+                        <button type="button" class="btn btn-block btn-sm btn-outline-dark" onclick="loadBGM()">Load</button>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class=col>                    
+                    <small class="text-dark">Default song: "Townie Loop" Kevin MacLeod (incompetech.com)
+                        Licensed under Creative Commons: By Attribution 4.0 License
+                        http://creativecommons.org/licenses/by/4.0/</small>
+                    </div>
+                </div>                       
+                <h5 class="font-weight-bold mt-2">Save game</h5>
                 <span id="gameState"></span>
                 <button type="button" class="btn btn-block btn-sm btn-success" onclick="saveGame()">Save game</button>
                 <button type="button" class="btn btn-block btn-sm btn-danger" onclick="clearGame()">Delete saved game</button>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-dark">Save changes</button>
             </div>
           </div>
         </div>
@@ -153,5 +267,10 @@
     <script src="./public/vendor/popper/popper.min.js"></script>
     <script src="./public/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="./public/js/main.js"></script>
+
+    <audio controls id="player" class="gameaudio" loop>
+        <source src="https://incompetech.com/music/royalty-free/mp3-royaltyfree/Townie%20Loop.mp3">
+        Your browser does not support the audio element.
+    </audio>
 </body>
 </html>
