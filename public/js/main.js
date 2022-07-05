@@ -18,7 +18,7 @@ function run(){
     save_data['lps'] += save_data['earth'] * save_data['earth_v'];
     lps_aux = setInterval(function(){
         save_data['counter'] += save_data['lps'];
-        production.innerHTML = save_data['counter'];
+        production.innerHTML = newNumber(save_data['counter'],2);
     },1000);
 }
 
@@ -81,6 +81,7 @@ function load() {
 
                 save_data['backgroundImage'] = "";
                 save_data['backgroundMusic'] = "";
+                save_data['cheats'] = false;
                 
                 
                 run();
@@ -95,47 +96,47 @@ function load() {
                 break;
 
         }
-        production.innerHTML = save_data['counter'];
-        per_second.innerHTML = save_data['lps'];
-        azufre.innerHTML = save_data['azufre'];
-        azufreValue.innerHTML = save_data['azufre_v'];
-        azufre_cost.innerHTML = save_data['azufreC'].toFixed(2);
-        azufreS_cost.innerHTML = save_data['azufreSC'].toFixed(2);
+        production.innerHTML = newNumber(save_data['counter'],2);
+        per_second.innerHTML = newNumber(save_data['lps'],2);
+        azufre.innerHTML = newNumber(save_data['azufre'],2);
+        azufreValue.innerHTML = newNumber(save_data['azufre_v'],2);
+        azufre_cost.innerHTML = newNumber(save_data['azufreC'],2);
+        azufreS_cost.innerHTML = newNumber(save_data['azufreSC'],2);
 
-        clicks_cost.innerHTML = save_data['click_cost'].toFixed(2);
+        clicks_cost.innerHTML = newNumber(save_data['click_cost'],2);
 
-        mercurio.innerHTML = save_data['mercurio'];
-        mercurioValue.innerHTML = save_data['mercurio_v'];
-        mercurio_cost.innerHTML = save_data['mercurioC'].toFixed(2);
-        mercurioS_cost.innerHTML = save_data['mercurioSC'].toFixed(2);
+        mercurio.innerHTML = newNumber(save_data['mercurio'],2);
+        mercurioValue.innerHTML = newNumber(save_data['mercurio_v'],2);
+        mercurio_cost.innerHTML = newNumber(save_data['mercurioC'],2);
+        mercurioS_cost.innerHTML = newNumber(save_data['mercurioSC'],2);
 
-        sal.innerHTML = save_data['sal'];
-        salValue.innerHTML = save_data['sal_v'];
-        sal_cost.innerHTML = save_data['salC'].toFixed(2);
-        salS_cost.innerHTML = save_data['salSC'].toFixed(2);
+        sal.innerHTML = newNumber(save_data['sal'],2);
+        salValue.innerHTML = newNumber(save_data['sal_v'],2);
+        sal_cost.innerHTML = newNumber(save_data['salC'],2);
+        salS_cost.innerHTML = newNumber(save_data['salSC'],2);
 
-        fire.innerHTML = save_data['fire'];
-        fireValue.innerHTML = save_data['fire_v'];
-        fire_cost.innerHTML = save_data['fireC'].toFixed(2);
-        fireS_cost.innerHTML = save_data['fireSC'].toFixed(2);
+        fire.innerHTML = newNumber(save_data['fire'],2);
+        fireValue.innerHTML = newNumber(save_data['fire_v'],2);
+        fire_cost.innerHTML = newNumber(save_data['fireC'],2);
+        fireS_cost.innerHTML = newNumber(save_data['fireSC'],2);
 
-        water.innerHTML = save_data['water'];
-        waterValue.innerHTML = save_data['water_v'];
-        water_cost.innerHTML = save_data['waterC'].toFixed(2);
-        waterS_cost.innerHTML = save_data['waterSC'].toFixed(2);
+        water.innerHTML = newNumber(save_data['water'],2);
+        waterValue.innerHTML = newNumber(save_data['water_v'],2);
+        water_cost.innerHTML = newNumber(save_data['waterC'],2);
+        waterS_cost.innerHTML = newNumber(save_data['waterSC'],2);
 
-        air.innerHTML = save_data['air'];
-        airValue.innerHTML = save_data['air_v'];
-        air_cost.innerHTML = save_data['airC'].toFixed(2);
-        airS_cost.innerHTML = save_data['airSC'].toFixed(2);
+        air.innerHTML = newNumber(save_data['air'],2);
+        airValue.innerHTML = newNumber(save_data['air_v'],2);
+        air_cost.innerHTML = newNumber(save_data['airC'],2);
+        airS_cost.innerHTML = newNumber(save_data['airSC'],2);
 
-        earth.innerHTML = save_data['earth'];
-        earthValue.innerHTML = save_data['earth_v'];
-        earth_cost.innerHTML = save_data['earthC'].toFixed(2);
-        earthS_cost.innerHTML = save_data['earthSC'].toFixed(2);
+        earth.innerHTML = newNumber(save_data['earth'],2);
+        earthValue.innerHTML = newNumber(save_data['earth_v'],2);
+        earth_cost.innerHTML = newNumber(save_data['earthC'],2);
+        earthS_cost.innerHTML = newNumber(save_data['earthSC'],2);
 
         stones.innerHTML = save_data['stone'];
-        stoneS_cost.innerHTML = save_data['stoneSC'].toFixed(2);
+        stoneS_cost.innerHTML = newNumber(save_data['stoneSC'],2);
 
 
         document.body.style.backgroundImage = "url('" + save_data['backgroundImage'] +"')";
@@ -150,8 +151,8 @@ function load() {
 }
 
 function add(){
-    save_data['counter'] += 1 * save_data['multiplier']; 
-    production.innerHTML = save_data['counter'];
+    save_data['counter'] += 1 * save_data['multiplier'] * save_data['lps']*0.005; 
+    production.innerHTML = newNumber(save_data['counter'],2);
 }
 
 function upgrade(type){
@@ -163,8 +164,8 @@ function upgrade(type){
                 save_data['azufre'] += 1;
                 stop();
                 run();
-                azufre.innerHTML = save_data['azufre'];
-                azufre_cost.innerHTML = save_data['azufreC'].toFixed(2);
+                azufre.innerHTML = newNumber(save_data['azufre'],2);
+                azufre_cost.innerHTML = newNumber(save_data['azufreC'],2);
             }
             break;
         case 2:
@@ -174,8 +175,8 @@ function upgrade(type){
                 save_data['mercurio'] += 1;
                 stop();
                 run();
-                mercurio.innerHTML = save_data['mercurio'];
-                mercurio_cost.innerHTML = save_data['mercurioC'].toFixed(2);
+                mercurio.innerHTML = newNumber(save_data['mercurio'],2);
+                mercurio_cost.innerHTML = newNumber(save_data['mercurioC'],2);
             }
             break;
         case 3:
@@ -185,8 +186,8 @@ function upgrade(type){
                 save_data['sal'] += 1;
                 stop();
                 run();
-                sal.innerHTML = save_data['sal'];
-                sal_cost.innerHTML = save_data['salC'].toFixed(2);
+                sal.innerHTML = newNumber(save_data['sal'],2);
+                sal_cost.innerHTML = newNumber(save_data['salC'],2);
             }
             break;
         case 4:
@@ -196,8 +197,8 @@ function upgrade(type){
                 save_data['fire'] += 1;
                 stop();
                 run();
-                fire.innerHTML = save_data['fire'];
-                fire_cost.innerHTML = save_data['fireC'].toFixed(2);
+                fire.innerHTML = newNumber(save_data['fire'],2);
+                fire_cost.innerHTML = newNumber(save_data['fireC'],2);
             }
             break;
         case 5:
@@ -207,8 +208,8 @@ function upgrade(type){
                 save_data['water'] += 1;
                 stop();
                 run();
-                water.innerHTML = save_data['water'];
-                water_cost.innerHTML = save_data['waterC'].toFixed(2);
+                water.innerHTML = newNumber(save_data['water'],2);
+                water_cost.innerHTML = newNumber(save_data['waterC'],2);
             }
             break;
         case 6:
@@ -218,8 +219,8 @@ function upgrade(type){
                 save_data['air'] += 1;
                 stop();
                 run();
-                air.innerHTML = save_data['air'];
-                air_cost.innerHTML = save_data['airC'].toFixed(2);
+                air.innerHTML = newNumber(save_data['air'],2);
+                air_cost.innerHTML = newNumber(save_data['airC'],2);
             }
             break;
         case 7:
@@ -229,13 +230,13 @@ function upgrade(type){
                 save_data['earth'] += 1;
                 stop();
                 run();
-                earth.innerHTML = save_data['earth'];
-                earth_cost.innerHTML = save_data['earthC'].toFixed(2);
+                earth.innerHTML = newNumber(save_data['earth'],2);
+                earth_cost.innerHTML = newNumber(save_data['earthC'],2);
             }
             break;
     }
-    production.innerHTML = save_data['counter'];
-    per_second.innerHTML = save_data['lps'];
+    production.innerHTML = newNumber(save_data['counter'],2);
+    per_second.innerHTML = newNumber(save_data['lps'],2);
 }
 
 function upgradeSpirit(type){
@@ -243,11 +244,11 @@ function upgradeSpirit(type){
         case 0:
             if (save_data['counter']>=save_data['click_cost']){
                 save_data['counter'] -= Math.round(save_data['click_cost']);
-                save_data['click_cost'] = save_data['click_cost'] * Math.pow(2.1,(save_data['multiplier']+1));
+                save_data['click_cost'] = save_data['click_cost'] * Math.pow(1.2,(save_data['multiplier']+1));
                 save_data['multiplier'] += 1;
                 stop();
                 run();
-                clicks_cost.innerHTML = save_data['click_cost'].toFixed(2);
+                clicks_cost.innerHTML = newNumber(save_data['click_cost'],2);
             }
             break;
         case 1:
@@ -258,8 +259,8 @@ function upgradeSpirit(type){
                 save_data['azufre_v'] = save_data['azufre_v']*2;
                 stop();
                 run();
-                azufreValue.innerHTML = save_data['azufre_v'];
-                azufreS_cost.innerHTML = save_data['azufreSC'].toFixed(2);
+                azufreValue.innerHTML = newNumber(save_data['azufre_v'],2);
+                azufreS_cost.innerHTML = newNumber(save_data['azufreSC'],2);
             }
             break;
         case 2:
@@ -270,8 +271,8 @@ function upgradeSpirit(type){
                 save_data['mercurio_v'] = save_data['mercurio_v']*2;
                 stop();
                 run();
-                mercurioValue.innerHTML = save_data['mercurio_v'];
-                mercurioS_cost.innerHTML = save_data['mercurioSC'].toFixed(2);
+                mercurioValue.innerHTML = newNumber(save_data['mercurio_v'],2);
+                mercurioS_cost.innerHTML = newNumber(save_data['mercurioSC'],2);
             }
             break;
         case 3:
@@ -282,8 +283,8 @@ function upgradeSpirit(type){
                 save_data['sal_v'] = save_data['sal_v']*2;
                 stop();
                 run();
-                salValue.innerHTML = save_data['sal_v'];
-                salS_cost.innerHTML = save_data['salSC'].toFixed(2);
+                salValue.innerHTML = newNumber(save_data['sal_v'],2);
+                salS_cost.innerHTML = newNumber(save_data['salSC'],2);
             }
             break;
         case 4:
@@ -294,8 +295,8 @@ function upgradeSpirit(type){
                 save_data['fire_v'] = save_data['fire_v']*2;
                 stop();
                 run();
-                fireValue.innerHTML = save_data['fire_v'];
-                fireS_cost.innerHTML = save_data['fireSC'].toFixed(2);
+                fireValue.innerHTML = newNumber(save_data['fire_v'],2);
+                fireS_cost.innerHTML = newNumber(save_data['fireSC'],2);
             }
             break;
         case 5:
@@ -306,8 +307,8 @@ function upgradeSpirit(type){
                 save_data['water_v'] = save_data['water_v']*2;
                 stop();
                 run();
-                waterValue.innerHTML = save_data['water_v'];
-                waterS_cost.innerHTML = save_data['waterSC'].toFixed(2);
+                waterValue.innerHTML = newNumber(save_data['water_v'],2);
+                waterS_cost.innerHTML = newNumber(save_data['waterSC'],2);
             }
             break;
         case 6:
@@ -318,8 +319,8 @@ function upgradeSpirit(type){
                 save_data['air_v'] = save_data['air_v']*2;
                 stop();
                 run();
-                airValue.innerHTML = save_data['air_v'];
-                airS_cost.innerHTML = save_data['airSC'].toFixed(2);
+                airValue.innerHTML = newNumber(save_data['air_v'],2);
+                airS_cost.innerHTML = newNumber(save_data['airSC'],2);
             }
             break;
         case 7:
@@ -330,26 +331,34 @@ function upgradeSpirit(type){
                 save_data['earth_v'] = save_data['earth_v']*2;
                 stop();
                 run();
-                earthValue.innerHTML = save_data['earth_v'];
-                earthS_cost.innerHTML = save_data['earthSC'].toFixed(2);
+                earthValue.innerHTML = newNumber(save_data['earth_v'],2);
+                earthS_cost.innerHTML = newNumber(save_data['earthSC'],2);
             }
             break;
         case 8:
             if (save_data['counter']>=save_data['stoneSC']){
+                if(save_data['cheats']){
+                    save_data['stone']-=7;
+                }
                 save_data['counter'] -= Math.round(save_data['stoneSC']);
-                save_data['stoneSC'] = save_data['stoneSC'] * Math.pow(4,(save_data['stone']+1));
+                save_data['stoneSC'] = save_data['stoneSC'] * Math.pow(2.2,(save_data['stone']+1));
                 save_data['stone'] += 1;
                 stop();
                 run();
+                if(save_data['cheats']){
+                    save_data['stone']+=7;
+                }
                 stones.innerHTML = save_data['stone'];
-                stoneS_cost.innerHTML = save_data['stoneSC'].toFixed(2);
+                stoneS_cost.innerHTML = newNumber(save_data['stoneSC'],2);
             }
             break;
     }
-    production.innerHTML = save_data['counter'];
-    per_second.innerHTML = save_data['lps'];    
+    production.innerHTML = newNumber(save_data['counter'],2);
+    per_second.innerHTML = newNumber(save_data['lps'],2);    
     
 }
+
+// Options
 
 function saveGame(){
     localStorage.setItem('save_data', JSON.stringify(save_data));
@@ -404,5 +413,38 @@ function musicStart(){
     }
 }
 
+//Easter eggs
+function activateCheats() {
+    //document.body.style.backgroundImage = "url('images/cheatBackground.png')";
+    if(!save_data['cheats']){
+        $("#cheatsMSG").html("You made a contract with Paracelsus.<br>You get +7 Philosopher's Stones");
+        $('#cheats').modal("show");
+        save_data['stone'] += 7;
+        stones.innerHTML = save_data['stone'];
+        save_data['cheats'] = true;
+    }
+    else{
+        $("#cheatsMSG").html("You already have this contract.");
+        $('#cheats').modal("show");
+    }
+    
+}
 
+// Formato de numeros
+function newNumber(num, digits) {
+    const lookup = [
+      { value: 1, symbol: "" },
+      { value: 1e3, symbol: "K" },
+      { value: 1e6, symbol: "M" },
+      { value: 1e9, symbol: "G" },
+      { value: 1e12, symbol: "T" },
+      { value: 1e15, symbol: "P" },
+      { value: 1e18, symbol: "E" }
+    ];
+    const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    var item = lookup.slice().reverse().find(function(item) {
+      return num >= item.value;
+    });
+    return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+}
   

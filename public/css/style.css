@@ -62,6 +62,12 @@ body{
   color: rgb(221, 25, 113);
 }
 
+.cheatsB{
+  background-color: royalblue;
+  color: white;
+  font-weight: bolder;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 5px;
