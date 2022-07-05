@@ -151,7 +151,7 @@ function load() {
 }
 
 function add(){
-    save_data['counter'] += 1 * save_data['multiplier'] * save_data['lps']*0.005; 
+    save_data['counter'] += 1 * save_data['multiplier'] * save_data['lps']*0.005 + 1; 
     production.innerHTML = newNumber(save_data['counter'],2);
 }
 
