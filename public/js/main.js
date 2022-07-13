@@ -27,6 +27,8 @@ function stop(){
 }
 
 function load() {
+    console.log('Game version: 1.1.0');
+
     try{
         switch(save_data['counter']){
             case undefined: 
@@ -79,6 +81,10 @@ function load() {
                 save_data['stone'] = 0;
                 save_data['stoneSC'] = 376000000;
 
+                save_data['quimera'] = false;
+                save_data['homunculo'] = false;
+                save_data['eterna_juventud'] = false;
+
                 save_data['backgroundImage'] = "";
                 save_data['backgroundMusic'] = "";
                 save_data['cheats'] = false;
@@ -96,6 +102,18 @@ function load() {
                 break;
 
         }
+
+        if(save_data['quimera']){
+            btnChimera.disabled = true;
+        }
+        if(save_data['homunculo']){
+            btnHomunculus.disabled = true;
+        }
+        if(save_data['eterna_juventud']){
+            btnEternal.disabled = true;
+        }
+
+
         production.innerHTML = newNumber(save_data['counter'],2);
         per_second.innerHTML = newNumber(save_data['lps'],2);
         azufre.innerHTML = newNumber(save_data['azufre'],2);
@@ -148,6 +166,7 @@ function load() {
     catch (e){
         console.log ('Unexpected error: ' + e.message)
     }
+    console.log('This is the GODMODE Console.');
 }
 
 function add(){
@@ -160,7 +179,7 @@ function upgrade(type){
         case 1:
             if (save_data['counter']>=save_data['azufreC']){
                 save_data['counter'] -= Math.round(save_data['azufreC']);
-                save_data['azufreC'] = save_data['azufreC'] * Math.pow(1.4,(save_data['azufre']+1));
+                save_data['azufreC'] = save_data['azufreC'] * Math.pow(1.04,(save_data['azufre']+1));
                 save_data['azufre'] += 1;
                 stop();
                 run();
@@ -171,7 +190,7 @@ function upgrade(type){
         case 2:
             if (save_data['counter']>=save_data['mercurioC']){
                 save_data['counter'] -= Math.round(save_data['mercurioC']);
-                save_data['mercurioC'] = save_data['mercurioC'] * Math.pow(1.6,(save_data['mercurio']+1));
+                save_data['mercurioC'] = save_data['mercurioC'] * Math.pow(1.06,(save_data['mercurio']+1));
                 save_data['mercurio'] += 1;
                 stop();
                 run();
@@ -182,7 +201,7 @@ function upgrade(type){
         case 3:
             if (save_data['counter']>=save_data['salC']){
                 save_data['counter'] -= Math.round(save_data['salC']);
-                save_data['salC'] = save_data['salC'] * Math.pow(1.8,(save_data['sal']+1));
+                save_data['salC'] = save_data['salC'] * Math.pow(1.08,(save_data['sal']+1));
                 save_data['sal'] += 1;
                 stop();
                 run();
@@ -193,7 +212,7 @@ function upgrade(type){
         case 4:
             if (save_data['counter']>=save_data['fireC']){
                 save_data['counter'] -= Math.round(save_data['fireC']);
-                save_data['fireC'] = save_data['fireC'] * Math.pow(2.0,(save_data['fire']+1));
+                save_data['fireC'] = save_data['fireC'] * Math.pow(1.10,(save_data['fire']+1));
                 save_data['fire'] += 1;
                 stop();
                 run();
@@ -204,7 +223,7 @@ function upgrade(type){
         case 5:
             if (save_data['counter']>=save_data['waterC']){
                 save_data['counter'] -= Math.round(save_data['waterC']);
-                save_data['waterC'] = save_data['waterC'] * Math.pow(2.2,(save_data['water']+1));
+                save_data['waterC'] = save_data['waterC'] * Math.pow(1.12,(save_data['water']+1));
                 save_data['water'] += 1;
                 stop();
                 run();
@@ -215,7 +234,7 @@ function upgrade(type){
         case 6:
             if (save_data['counter']>=save_data['airC']){
                 save_data['counter'] -= Math.round(save_data['airC']);
-                save_data['airC'] = save_data['airC'] * Math.pow(2.4,(save_data['air']+1));
+                save_data['airC'] = save_data['airC'] * Math.pow(1.14,(save_data['air']+1));
                 save_data['air'] += 1;
                 stop();
                 run();
@@ -226,7 +245,7 @@ function upgrade(type){
         case 7:
             if (save_data['counter']>=save_data['earthC']){
                 save_data['counter'] -= Math.round(save_data['earthC']);
-                save_data['earthC'] = save_data['earthC'] * Math.pow(2.6,(save_data['earth']+1));
+                save_data['earthC'] = save_data['earthC'] * Math.pow(1.16,(save_data['earth']+1));
                 save_data['earth'] += 1;
                 stop();
                 run();
@@ -244,7 +263,7 @@ function upgradeSpirit(type){
         case 0:
             if (save_data['counter']>=save_data['click_cost']){
                 save_data['counter'] -= Math.round(save_data['click_cost']);
-                save_data['click_cost'] = save_data['click_cost'] * Math.pow(1.2,(save_data['multiplier']+1));
+                save_data['click_cost'] = save_data['click_cost'] * Math.pow(1.02,(save_data['multiplier']+1));
                 save_data['multiplier'] += 1;
                 stop();
                 run();
@@ -254,7 +273,7 @@ function upgradeSpirit(type){
         case 1:
             if (save_data['counter']>=save_data['azufreSC']){
                 save_data['counter'] -= Math.round(save_data['azufreSC']);
-                save_data['azufreSC'] = save_data['azufreSC'] * Math.pow(1.9,(save_data['azufreSpirits']+1));
+                save_data['azufreSC'] = save_data['azufreSC'] * Math.pow(1.09,(save_data['azufreSpirits']+1));
                 save_data['azufreSpirits'] += 1;
                 save_data['azufre_v'] = save_data['azufre_v']*2;
                 stop();
@@ -266,7 +285,7 @@ function upgradeSpirit(type){
         case 2:
             if (save_data['counter']>=save_data['mercurioSC']){
                 save_data['counter'] -= Math.round(save_data['mercurioSC']);
-                save_data['mercurioSC'] = save_data['mercurioSC'] * Math.pow(1.9,(save_data['mercurioSpirits']+1));
+                save_data['mercurioSC'] = save_data['mercurioSC'] * Math.pow(1.1,(save_data['mercurioSpirits']+1));
                 save_data['mercurioSpirits'] += 1;
                 save_data['mercurio_v'] = save_data['mercurio_v']*2;
                 stop();
@@ -278,7 +297,7 @@ function upgradeSpirit(type){
         case 3:
             if (save_data['counter']>=save_data['salSC']){
                 save_data['counter'] -= Math.round(save_data['salSC']);
-                save_data['salSC'] = save_data['salSC'] * Math.pow(1.9,(save_data['salSpirits']+1));
+                save_data['salSC'] = save_data['salSC'] * Math.pow(1.11,(save_data['salSpirits']+1));
                 save_data['salSpirits'] += 1;
                 save_data['sal_v'] = save_data['sal_v']*2;
                 stop();
@@ -290,7 +309,7 @@ function upgradeSpirit(type){
         case 4:
             if (save_data['counter']>=save_data['fireSC']){
                 save_data['counter'] -= Math.round(save_data['fireSC']);
-                save_data['fireSC'] = save_data['fireSC'] * Math.pow(1.9,(save_data['fireSpirits']+1));
+                save_data['fireSC'] = save_data['fireSC'] * Math.pow(1.12,(save_data['fireSpirits']+1));
                 save_data['fireSpirits'] += 1;
                 save_data['fire_v'] = save_data['fire_v']*2;
                 stop();
@@ -302,7 +321,7 @@ function upgradeSpirit(type){
         case 5:
             if (save_data['counter']>=save_data['waterSC']){
                 save_data['counter'] -= Math.round(save_data['waterSC']);
-                save_data['waterSC'] = save_data['waterSC'] * Math.pow(1.9,(save_data['waterSpirits']+1));
+                save_data['waterSC'] = save_data['waterSC'] * Math.pow(1.13,(save_data['waterSpirits']+1));
                 save_data['waterSpirits'] += 1;
                 save_data['water_v'] = save_data['water_v']*2;
                 stop();
@@ -314,7 +333,7 @@ function upgradeSpirit(type){
         case 6:
             if (save_data['counter']>=save_data['airSC']){
                 save_data['counter'] -= Math.round(save_data['airSC']);
-                save_data['airSC'] = save_data['airSC'] * Math.pow(1.9,(save_data['airSpirits']+1));
+                save_data['airSC'] = save_data['airSC'] * Math.pow(1.14,(save_data['airSpirits']+1));
                 save_data['airSpirits'] += 1;
                 save_data['air_v'] = save_data['air_v']*2;
                 stop();
@@ -326,7 +345,7 @@ function upgradeSpirit(type){
         case 7:
             if (save_data['counter']>=save_data['earthSC']){
                 save_data['counter'] -= Math.round(save_data['earthSC']);
-                save_data['earthSC'] = save_data['earthSC'] * Math.pow(1.9,(save_data['earthSpirits']+1));
+                save_data['earthSC'] = save_data['earthSC'] * Math.pow(1.15,(save_data['earthSpirits']+1));
                 save_data['earthSpirits'] += 1;
                 save_data['earth_v'] = save_data['earth_v']*2;
                 stop();
@@ -341,7 +360,7 @@ function upgradeSpirit(type){
                     save_data['stone']-=7;
                 }
                 save_data['counter'] -= Math.round(save_data['stoneSC']);
-                save_data['stoneSC'] = save_data['stoneSC'] * Math.pow(2.2,(save_data['stone']+1));
+                save_data['stoneSC'] = save_data['stoneSC'] * Math.pow(1.02,(save_data['stone']+1));
                 save_data['stone'] += 1;
                 stop();
                 run();
@@ -350,6 +369,32 @@ function upgradeSpirit(type){
                 }
                 stones.innerHTML = save_data['stone'];
                 stoneS_cost.innerHTML = newNumber(save_data['stoneSC'],2);
+            }
+            break;
+        case 9:
+            if (save_data['stone']>=10 && !save_data['quimera']){
+                save_data['stone'] -= 10;
+                stones.innerHTML = save_data['stone'];
+                btnChimera.disabled = true;
+                save_data['quimera']=true;
+            }
+            break;
+        case 10:
+            if (save_data['stone']>=15 && !save_data['homunculo']){
+                save_data['stone'] -= 15;
+                stones.innerHTML = save_data['stone'];
+                btnHomunculus.disabled = true;
+                save_data['homunculo']=true;
+            }
+            break;
+        case 11:
+            if (save_data['stone']>=20 && !save_data['eterna_juventud']){
+                save_data['stone'] -= 20;
+                stones.innerHTML = save_data['stone'];
+                btnEternal.disabled = true;
+                save_data['eterna_juventud']=true;
+                $("#cheatsMSG").html("Now you are <span class='font-weight-bold'>INMORTAL</span>!");
+                $('#cheats').modal("show");
             }
             break;
     }
@@ -439,7 +484,9 @@ function newNumber(num, digits) {
       { value: 1e9, symbol: "G" },
       { value: 1e12, symbol: "T" },
       { value: 1e15, symbol: "P" },
-      { value: 1e18, symbol: "E" }
+      { value: 1e18, symbol: "E" },
+      { value: 1e21, symbol: "Z" },
+      { value: 1e24, symbol: "Y" }
     ];
     const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
     var item = lookup.slice().reverse().find(function(item) {
