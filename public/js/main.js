@@ -360,7 +360,7 @@ function upgradeSpirit(type){
                     save_data['stone']-=7;
                 }
                 save_data['counter'] -= Math.round(save_data['stoneSC']);
-                save_data['stoneSC'] = save_data['stoneSC'] * Math.pow(1.02,(save_data['stone']+1));
+                save_data['stoneSC'] = save_data['stoneSC'] * Math.pow(1.04,(save_data['stone']+1));
                 save_data['stone'] += 1;
                 stop();
                 run();
@@ -469,8 +469,48 @@ function activateCheats() {
         save_data['cheats'] = true;
     }
     else{
-        $("#cheatsMSG").html("You already have this contract.");
+        $("#cheatsMSG").html("You already have a contract.");
         $('#cheats').modal("show");
+    }
+    
+}
+
+function activateCheats2() {
+    //document.body.style.backgroundImage = "url('images/cheatBackground.png')";
+    if(!save_data['cheats'] && save_data['eterna_juventud']){
+        $("#cheatsMSG").html("Now I have infinite knowledge.");
+        $('#cheats').modal("show");
+        save_data['stone'] = 1.618033988749895;
+        stones.innerHTML = save_data['stone'];
+        save_data['cheats'] = true;
+        stop();
+        gamebox.style.backgroundColor = '#FFD700';
+        $('.card-body').css('background-color', '#C4A400');
+        $('.card').css('border', '1px solid black');
+        $('.btn').css('border', '1px solid black');
+        $('.btn-outline-info').css('color', '#000000');
+
+    }
+    else if(!save_data['cheats']){
+        $("#cheatsMSG").html("||𝙹⚍ ᒷリℸ ̣ ᒷ∷ᒷ↸ ᔑ !¡ꖎᔑᓵᒷ ʖᒷ||𝙹リ↸ ᔑꖎꖎ ⍑⚍ᒲᔑリ ᓵ𝙹ᒲ!¡∷ᒷ⍑ᒷリᓭ╎𝙹リ... ");
+        $('#cheats').modal("show");
+        save_data['stone'] = -42;
+        stones.innerHTML = save_data['stone'];
+        save_data['cheats'] = true;
+        btnChimera.disabled = true;
+        save_data['quimera']=true;
+        btnHomunculus.disabled = true;
+        save_data['homunculo']=true;
+        btnEternal.disabled = true;
+        save_data['eterna_juventud']=true;
+        stop();
+    }
+    else{
+        $("#cheatsMSG").html("...");
+        $('#cheats').modal("show");
+        save_data['stone'] = 0;
+        stones.innerHTML = save_data['stone'];
+        stop();
     }
     
 }
