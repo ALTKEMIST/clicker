@@ -1,6 +1,13 @@
 var save_data = {};
 var lps_aux;
 var musicOn = false;
+var mg_turns = 0;
+var mg_finished = false;
+var opponent = [-1,-1,-1,-1,-1,-1,-1,-1,-1];
+var board = [-1,-1,-1,-1,-1,-1,-1,-1,-1];
+var opponentCount = 0;
+var opponentScore = 0;
+var yourScore = 0;
 
 function loadLista(){
     save_data = JSON.parse(localStorage.getItem('save_data'));
@@ -27,7 +34,7 @@ function stop(){
 }
 
 function load() {
-    console.log('Game version: 1.1.0');
+    console.log('Game version: 1.2.0');
 
     try{
         switch(save_data['counter']){
@@ -88,6 +95,8 @@ function load() {
                 save_data['backgroundImage'] = "";
                 save_data['backgroundMusic'] = "";
                 save_data['cheats'] = false;
+
+                save_data['minigameWin'] = false;
                 
                 
                 run();
@@ -388,7 +397,7 @@ function upgradeSpirit(type){
             }
             break;
         case 11:
-            if (save_data['stone']>=20 && !save_data['eterna_juventud']){
+            if (save_data['stone']>=20 && !save_data['eterna_juventud'] && save_data['quimera'] && save_data['homunculo']){
                 save_data['stone'] -= 20;
                 stones.innerHTML = save_data['stone'];
                 btnEternal.disabled = true;
@@ -534,4 +543,303 @@ function newNumber(num, digits) {
     });
     return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
 }
-  
+
+//minigames
+
+function mg_roll(){
+    try{
+        var valid = false;
+        var dice = 0;
+
+        if (!mg_finished && !$('#mg_Select').find(':selected').prop('disabled') ){
+            mg_turns += 1;
+            mg_turn.innerHTML = mg_turns;
+
+            // Opponent's move
+            while(!valid){
+                dice = Math.floor(Math.random() * 9);
+
+                switch(dice){
+                    case 0: if (opponent[dice] == -1){
+                                opponent[dice] = Math.floor(Math.random() * 9) + 1;
+                                oA1S.innerHTML = opponent[dice];
+                                valid = true;
+                                opponentCount += 1;
+                            }
+                            else{
+                                valid = false;
+                            }
+                            break;
+                    case 1: if (opponent[dice] == -1){
+                                opponent[dice] = Math.floor(Math.random() * 9) + 1;
+                                oA1D.innerHTML = opponent[dice];
+                                valid = true;
+                                opponentCount += 1;
+                            }
+                            else{
+                                valid = false;
+                            }
+                            break;
+                    case 2: if (opponent[dice] == -1){
+                                opponent[dice] = Math.floor(Math.random() * 9) + 1;
+                                oA1T.innerHTML = opponent[dice];
+                                valid = true;
+                                opponentCount += 1;
+                            }
+                            else{
+                                valid = false;
+                            }
+                            break;  
+                    case 3: if (opponent[dice] == -1){
+                                opponent[dice] = Math.floor(Math.random() * 9) + 1;
+                                oB1S.innerHTML = opponent[dice];
+                                valid = true;
+                                opponentCount += 1;
+                            }
+                            else{
+                                valid = false;
+                            }
+                            break;    
+                    case 4: if (opponent[dice] == -1){
+                                opponent[dice] = Math.floor(Math.random() * 9) + 1;
+                                oB1D.innerHTML = opponent[dice];
+                                valid = true;
+                                opponentCount += 1;
+                            }
+                            else{
+                                valid = false;
+                            }
+                            break; 
+                    case 5: if (opponent[dice] == -1){
+                                opponent[dice] = Math.floor(Math.random() * 9) + 1;
+                                oB1T.innerHTML = opponent[dice];
+                                valid = true;
+                                opponentCount += 1;
+                            }
+                            else{
+                                valid = false;
+                            }
+                            break;
+                    case 6: if (opponent[dice] == -1){
+                                opponent[dice] = Math.floor(Math.random() * 9) + 1;
+                                oC1S.innerHTML = opponent[dice];
+                                valid = true;
+                                opponentCount += 1;
+                            }
+                            else{
+                                valid = false;
+                            }
+                            break;
+                    case 7: if (opponent[dice] == -1){
+                                opponent[dice] = Math.floor(Math.random() * 9) + 1;
+                                oC1D.innerHTML = opponent[dice];
+                                valid = true;
+                                opponentCount += 1;
+                            }
+                            else{
+                                valid = false;
+                            }
+                            break;
+                    case 8: if (opponent[dice] == -1){
+                                opponent[dice] = Math.floor(Math.random() * 9) + 1;
+                                oC1T.innerHTML = opponent[dice];
+                                valid = true;
+                                opponentCount += 1;
+                            }
+                            else{
+                                valid = false;
+                            }
+                            break;
+                    
+                }
+
+                if (opponentCount >= 9){
+                    valid = true;
+                } 
+            }
+
+            // Your move
+            dice = Math.floor(Math.random() * 9) + 1;
+            switch(mg_Select.value){
+                case 'A2S': yA2S.innerHTML = dice;
+                            mgo1.disabled = true;
+                            mgo1.hidden = true;
+                            board[0]=dice;
+                            break;
+                case 'A2D': yA2D.innerHTML = dice;
+                            mgo2.disabled = true;
+                            mgo2.hidden = true;
+                            board[1]=dice;
+                            break;
+                case 'A2T': yA2T.innerHTML = dice;
+                            mgo3.disabled = true;
+                            mgo3.hidden = true;
+                            board[2]=dice;
+                            break;
+                case 'B2S': yB2S.innerHTML = dice;
+                            mgo4.disabled = true;
+                            mgo4.hidden = true;
+                            board[3]=dice;
+                            break;
+                case 'B2D': yB2D.innerHTML = dice;
+                            mgo5.disabled = true;
+                            mgo5.hidden = true;
+                            board[4]=dice;
+                            break;
+                case 'B2T': yB2T.innerHTML = dice;
+                            mgo6.disabled = true;
+                            mgo6.hidden = true;
+                            board[5]=dice;
+                            break;
+                case 'C2S': yC2S.innerHTML = dice;
+                            mgo7.disabled = true;
+                            mgo7.hidden = true;
+                            board[6]=dice;
+                            break;
+                case 'C2D': yC2D.innerHTML = dice;
+                            mgo8.disabled = true;
+                            mgo8.hidden = true;
+                            board[7]=dice;
+                            break;
+                case 'C2T': yC2T.innerHTML = dice;
+                            mgo9.disabled = true;
+                            mgo9.hidden = true;
+                            board[8]=dice;
+                            break;
+            }
+
+            opponentScore = 0;
+            yourScore = 0;
+
+            for (var i=0; i<9; i++){
+                
+                if (opponent[i] != -1){
+                    if ( (i==1 || i==4 || i==7)  && ( ( (opponent[1] == opponent[4]) && (opponent[1] !=-1))  || ((opponent[1] == opponent[7]) && (opponent[1] !=-1)) || ( (opponent[4] == opponent[7]) && (opponent[4] !=-1)) ) ){
+                        opponentScore += opponent[i] * 2;
+                    }
+                    else if( (i==2 || i==5 || i==8)  && (  ((opponent[2] == opponent[5]) && (opponent[2] !=-1) ) || ( (opponent[2] == opponent[8]) && (opponent[2] !=-1 ) ) || ((opponent[5] == opponent[8]) && (opponent[5] !=-1) ) ) ){
+                        opponentScore += opponent[i] * 3;
+                    }
+                    else{
+                        opponentScore += opponent[i];
+                    }
+                }
+            }
+
+            for (var i=0; i<9; i++){
+                
+                if (board[i] != -1){
+                    if ( (i==1 || i==4 || i==7)  && ( ( (board[1] == board[4]) && (board[1] !=-1))  || ((board[1] == board[7]) && (board[1] !=-1)) || ( (board[4] == board[7]) && (board[4] !=-1)) ) ){
+                        yourScore += board[i] * 2;
+                    }
+                    else if( (i==2 || i==5 || i==8)  && (  ((board[2] == board[5]) && (board[2] !=-1) ) || ( (board[2] == board[8]) && (board[2] !=-1 ) ) || ((board[5] == board[8]) && (board[5] !=-1) ) ) ){
+                        yourScore += board[i] * 3;
+                    }
+                    else{
+                        yourScore += board[i];
+                    }
+                }
+            }
+
+            scoreO.innerHTML = opponentScore;
+            scoreY.innerHTML = yourScore;
+            
+            
+            if (mg_turns >= 9){
+                if(opponentScore > yourScore){
+                    mg_result.innerHTML = 'You lose.';
+                }
+                else if(opponentScore == yourScore){
+                    mg_result.innerHTML = 'Draw.';
+                }
+                else{
+                    if(!save_data['minigameWin']){
+                        save_data['stone'] += 1;
+                        save_data['minigameWin'] = true;
+                        stones.innerHTML = save_data['stone'];
+                        mg_result.innerHTML = "You win. <span style='color:rgb(221, 25, 113)'>You get a Philosopher's stone</span>";
+                    }
+                    else{
+                        mg_result.innerHTML = "You win."
+                    }
+                }
+                
+                mg_finished = true;
+            }
+        }
+
+    }
+    catch (e){
+        console.log ('Unexpected error: ' + e.message);
+    }
+    
+}
+
+function mg_reset(){
+    if (confirm("Restart minigame?")){
+        mg_result.innerHTML = "Roll a dice"
+        mg_turns = 0;
+        mg_finished = false;
+        opponent = [-1,-1,-1,-1,-1,-1,-1,-1,-1];
+        board = [-1,-1,-1,-1,-1,-1,-1,-1,-1];
+        opponentCount = 0;
+        opponentScore = 0;
+        yourScore = 0;
+
+        scoreO.innerHTML = opponentScore;
+        scoreY.innerHTML = yourScore;
+        mg_turn.innerHTML = mg_turns;
+
+        oA1S.innerHTML = '#';
+        oA1D.innerHTML = '#';
+        oA1T.innerHTML = '#';
+
+        oB1S.innerHTML = '#';
+        oB1D.innerHTML = '#';
+        oB1T.innerHTML = '#';
+
+        oC1S.innerHTML = '#';
+        oC1D.innerHTML = '#';
+        oC1T.innerHTML = '#';
+
+        yA2S.innerHTML = '#';
+        yA2D.innerHTML = '#';
+        yA2T.innerHTML = '#';
+
+        yB2S.innerHTML = '#';
+        yB2D.innerHTML = '#';
+        yB2T.innerHTML = '#';
+
+        yC2S.innerHTML = '#';
+        yC2D.innerHTML = '#';
+        yC2T.innerHTML = '#';
+
+        mgo1.disabled = false;
+        mgo1.hidden = false;
+
+        mgo2.disabled = false;
+        mgo2.hidden = false;
+
+        mgo3.disabled = false;
+        mgo3.hidden = false;
+
+        mgo4.disabled = false;
+        mgo4.hidden = false;
+
+        mgo5.disabled = false;
+        mgo5.hidden = false;
+
+        mgo6.disabled = false;
+        mgo6.hidden = false;
+
+        mgo7.disabled = false;
+        mgo7.hidden = false;
+
+        mgo8.disabled = false;
+        mgo8.hidden = false;
+
+        mgo9.disabled = false;
+        mgo9.hidden = false;
+
+    }
+}
