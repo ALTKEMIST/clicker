@@ -34,7 +34,7 @@ function stop(){
 }
 
 function load() {
-    console.log('Game version: 1.2.0');
+    console.log('Game version: 1.3.0');
 
     try{
         switch(save_data['counter']){
@@ -97,7 +97,7 @@ function load() {
                 save_data['cheats'] = false;
 
                 save_data['minigameWin'] = false;
-                
+                save_data['minigame2Win'] = false;
                 
                 run();
                 break;
@@ -842,4 +842,243 @@ function mg_reset(){
         mgo9.hidden = false;
 
     }
+}
+
+// Minigame 2
+function shuffle(sourceArray) {
+    for (var i = 0; i < sourceArray.length - 1; i++) {
+        var j = i + Math.floor(Math.random() * (sourceArray.length - i));
+
+        var temp = sourceArray[j];
+        sourceArray[j] = sourceArray[i];
+        sourceArray[i] = temp;
+    }
+    return sourceArray;
+}
+
+var matrix = [];
+var e = {};
+function playMemorize(){
+    e = {
+        '🜍' : 'Sulfur',
+        '☿' : 'Mercury',
+        '🜔' : 'Salt',
+        '🜂' : 'Fire',
+        '🜄' : 'Water',
+        '🜁' : 'Air',
+        '🜃' : 'Earth',
+        '🜀' : 'Quintessence',
+        '🜏' : 'Black Sulfur',
+        '🜚' : 'Gold',
+        '🜛' : 'Silver',
+        '♃' : 'Tin',
+        '☉' : 'Sun',
+        '☽' : 'Moon',
+        '🜲' : 'Regulus',
+        '🜊': 'Vinegar',
+        '🜕': 'Nitre',
+        '🜜': 'Iron ore',
+        '🜠': 'Copper ore',
+        '🜺': 'Arsenic',
+        '🝊': 'Wax'
+    }
+
+    var array = [], i=0;
+
+    for (var item in e){
+        array.push (item);
+    }
+
+    array = shuffle (array);
+
+    matrix = [];
+    for (i=0; i<21; i++){
+        matrix.push([array[i],array[i+1], array[i+2]]);
+        i += 2;
+    }
+
+    indication.innerHTML = 'In which column is the symbol you chose?'
+    var result = "<table class='table table-bordered mt-2 text-center h2 table-info'><tbody>";
+    for (i=0; i<7; i++){
+        result += "<tr><td>"+matrix[i][0]+"</td><td>"+matrix[i][1]+"</td><td>"+matrix[i][2]+"</td></tr>";
+    }
+    
+    result += "<tr><td><button class='btn btn-block btn-outline-dark' onclick='memRound2(0)'>LEFT</button></td>";
+    result += "<td><button class='btn btn-block btn-outline-dark' onclick='memRound2(1)'>CENTER</button></td>";
+    result += "<td><button class='btn btn-block btn-outline-dark' onclick='memRound2(2)'>RIGHT</button></td></tr>"
+    result += "</tbody></table>";
+
+    memorizeBoard.innerHTML = result;
+
+}
+
+function deckShuffle(array, selection){
+    switch (selection){
+        case 0:
+            for (i=0; i<7; i++){
+                array.push (matrix[i][1]);
+            }
+
+            for (i=0; i<7; i++){
+                array.push (matrix[i][0]);
+            }
+
+            for (i=0; i<7; i++){
+                array.push (matrix[i][2]);
+            }
+            break;
+        case 1:
+            for (i=0; i<7; i++){
+                array.push (matrix[i][0]);
+            }
+
+            for (i=0; i<7; i++){
+                array.push (matrix[i][1]);
+            }
+
+            for (i=0; i<7; i++){
+                array.push (matrix[i][2]);
+            }
+            break;
+        case 2:
+            for (i=0; i<7; i++){
+                array.push (matrix[i][0]);
+            }
+
+            for (i=0; i<7; i++){
+                array.push (matrix[i][2]);
+            }
+
+            for (i=0; i<7; i++){
+                array.push (matrix[i][1]);
+            }
+            break;
+    }
+    return array;
+}
+
+function memRound2(select){
+    var array = [], i=0;
+    array = deckShuffle(array, select);
+
+    matrix = [];
+    for (i=0; i<21; i++){
+        matrix.push([array[i],array[i+1], array[i+2]]);
+        i += 2;
+    }
+
+    indication.innerHTML = 'Now, in which column is the symbol you chose?'
+    var result = "<table class='table table-bordered mt-2 text-center h2 table-primary'><tbody>";
+    for (i=0; i<7; i++){
+        result += "<tr><td>"+matrix[i][0]+"</td><td>"+matrix[i][1]+"</td><td>"+matrix[i][2]+"</td></tr>";
+    }
+    
+    result += "<tr><td><button class='btn btn-block btn-outline-dark' onclick='memRound3(0)'>LEFT</button></td>";
+    result += "<td><button class='btn btn-block btn-outline-dark' onclick='memRound3(1)'>CENTER</button></td>";
+    result += "<td><button class='btn btn-block btn-outline-dark' onclick='memRound3(2)'>RIGHT</button></td></tr>"
+    result += "</tbody></table>";
+
+    memorizeBoard.innerHTML = result;
+    
+}
+
+function memRound3(select){
+    var array = [], i=0;
+    array = deckShuffle(array, select);
+
+    matrix = [];
+    for (i=0; i<21; i++){
+        matrix.push([array[i],array[i+1], array[i+2]]);
+        i += 2;
+    }
+
+    indication.innerHTML = 'Finally, in which column is the symbol you chose?'
+    var result = "<table class='table table-bordered mt-2 text-center h2 table-warning'><tbody>";
+    for (i=0; i<7; i++){
+        result += "<tr><td>"+matrix[i][0]+"</td><td>"+matrix[i][1]+"</td><td>"+matrix[i][2]+"</td></tr>";
+    }
+    
+    result += "<tr><td><button class='btn btn-block btn-outline-dark' onclick='memRoundF(0)'>LEFT</button></td>";
+    result += "<td><button class='btn btn-block btn-outline-dark' onclick='memRoundF(1)'>CENTER</button></td>";
+    result += "<td><button class='btn btn-block btn-outline-dark' onclick='memRoundF(2)'>RIGHT</button></td></tr>"
+    result += "</tbody></table>";
+
+    memorizeBoard.innerHTML = result;
+    
+}
+
+function memRoundF(select){
+    var array = [], i=0;
+    array = deckShuffle(array, select);
+
+    matrix = [];
+
+    indication.innerHTML = 'The alchemical symbol you chose was:'
+    var result = "<table class='table table-bordered mt-2 text-center h1 table-light'><tbody>";
+    result += "<tr><td style='font-size: 100px;'>"+array[10]+"</td></tr>";
+    result += "<tr><td>"+e[array[10]]+"</td></tr>";
+    result += "</tbody></table>";
+    result += "<button class='btn btn-block btn-outline-dark' onclick='memRoundW(0)'>YES!</button>";
+    result += "<button class='btn btn-block btn-outline-dark' onclick='memRoundW(1)'>NOPE</button>";
+
+    memorizeBoard.innerHTML = result;
+    
+}
+
+function memRoundW(select){
+    var result = "";
+    if (!save_data['minigame2Win']){
+        switch(select){
+            case 0:
+                result = "<span class='text-center' style='color:rgb(221, 25, 113)'>Paracelsus gives you a Philosopher's stone</span>"
+                save_data['stone'] += 1;
+                save_data['minigame2Win'] = true;
+                stones.innerHTML = save_data['stone'];
+                break;
+            case 1:
+                result = "<span class='text-center' style='color:rgb(221, 25, 113)'>The chimeras watch you very carefully. Something went wrong, so you get nothing this time.</span>"
+                break;
+        }
+    }
+    else{
+        result = "<span class='text-center' style='color:rgb(221, 25, 113)'>The chimeras watch you very carefully. They know you're just back.</span>"
+    }
+
+    indication.innerHTML = result;
+    result = "";
+    result = "Do you wanna play again?";
+    result += "<button class='btn btn-block btn-outline-dark' onclick='memReset()'>YES!</button>";
+    result += "<button class='btn btn-block btn-outline-dark' data-dismiss='modal'>NOPE</button>";
+
+    memorizeBoard.innerHTML = result;
+    
+}
+
+function memReset(){
+    indication.innerHTML = "Memorize ONE of these alchemical symbols...";
+    var result = "<table class='table table-bordered mt-2 text-center h2 table-info'><tbody>";
+    
+    var array = [], i=0;
+
+    for (var item in e){
+        array.push (item);
+    }
+
+    array.push (" ");array.push (" ");array.push (" ");
+
+    matrix = [];
+    for (i=0; i<24; i++){
+        matrix.push([array[i],array[i+1], array[i+2], array[i+3], array[i+4], array[i+5]]);
+        i += 5;
+    }
+    for (i=0; i<4; i++){
+        result += "<tr><td>"+matrix[i][0]+"</td><td>"+matrix[i][1]+"</td><td>"+matrix[i][2]+"</td><td>"+matrix[i][3]+"</td><td>"+matrix[i][4]+"</td><td>"+matrix[i][5]+"</td></tr>";
+    }
+
+    result += "</tbody></table>";
+    result += "<button class='btn btn-block btn-outline-dark' onclick='playMemorize()'>I GOT IT!</button>";
+    memorizeBoard.innerHTML = result;
+
+    matrix = [];
+
 }

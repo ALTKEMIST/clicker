@@ -21,6 +21,13 @@ body{
   left: 20px;
 }
 
+#mgButton2{
+  color: rgb(60, 215, 49);
+  position: fixed;
+  left: 30px;
+  bottom: 90px;
+}
+
 .result_mg{
   color: black;
 }
